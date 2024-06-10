@@ -30,7 +30,7 @@ document.getElementById("4-fetch-no-store-with-abort").onclick = async () => {
   console.log('got this response', result.status);
 };
 
-// 5. Fetch with no-store header in response but use AbortController, and try to read response after (no leak)
+// 5. Fetch with no-store header in response but use AbortController, and try to read response after (no leak, but error is thrown)
 document.getElementById("5-fetch-no-store-with-abort-and-read").onclick = async () => {
   const abortController = new AbortController();
   const result = await fetch(cacheControlEndpoint, {signal: abortController.signal});
