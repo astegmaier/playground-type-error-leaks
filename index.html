@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TypeError Memory Leak</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-light.min.css"
+      integrity="sha512-WDk6RzwygsN9KecRHAfm9HTN87LQjqdygDmkHSJxVkVI7ErCZ8ZWxP6T8RvBujY1n2/E4Ac+bn2ChXnp5rnnHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      iframe { 
+        width: 320px;
+        height: 100px;
+        background-color: lightgray;
+        border: 2px solid black;
+        box-sizing: border-box;
+      }
+      #iframe-container {
+        height: 110px;
+        background-color: grey;
+        padding: 5px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      TypeError Memory Leak
+    </h1>
+    <p>
+      This page shows a memory leak that can occur due to <a href="https://issues.chromium.org/issues/343754408">Chromium bug 343754408</a>.
+      To observe the problem, click on one of the buttons below, take a heap snapshot, and look for "TypeError" objects.
+      For the repro case, you'll see something that looks like this:
+    </p>
+    <ol>
+      <li><button id="1-fetch-basic">Fetch with basic response (no leak)</button></li>
+      <li><button id="2-fetch-no-store">Fetch with no-store header in response (LEAK)</button></li>
+      <li><button id="3-fetch-no-store-and-read-body">Fetch with no-store header in response and read body (no leak)</button></li>
+      <li><button id="4-fetch-no-store-with-abort">Fetch with no-store header in response but use AbortController (no leak)</button></li>
+      <li><button id="5-fetch-no-store-with-abort-and-read">Fetch with no-store header in response but use AbortController, and try to read response after (no leak)</button></li>
+    </ol>
+    </div>
+    <hr />
+    <div>
+      We are running the following JavaScript code on this page (see
+      <a href="https://github.com/astegmaier/playground-hung-iframe-promise"
+        >github repo</a
+      >):
+    </div>
+    <pre><code class="language-javascript" id="code"></code></pre>
+    <script src="./index.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+      integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      fetch("./index.js")
+        .then((response) => response.text())
+        .then((code) => (document.getElementById("code").textContent = code))
+        .then(() => hljs.highlightAll());
+    </script>
+  </body>
+</html>
