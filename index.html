@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TypeError Memory Leak</title>
+    <title>TypeError Memory Leak Playground</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-light.min.css"
@@ -27,12 +27,15 @@
   </head>
   <body>
     <h1>
-      TypeError Memory Leak
+      TypeError Memory Leak Playground
     </h1>
     <p>
       This page shows a memory leak that can occur due to <a href="https://issues.chromium.org/issues/343754408">Chromium bug 343754408</a>.
       To observe the problem, click on one of the buttons below, take a heap snapshot, and look for "TypeError" objects.
       For the repro case, you'll see something that looks like this:
+    </p>
+    <p>
+      <img src="./leak_screenshot.png" alt="Screenshot of memory leak in Chrome DevTools">
     </p>
     <ol>
       <li><button id="1-fetch-basic">Fetch with basic response (no leak)</button></li>
