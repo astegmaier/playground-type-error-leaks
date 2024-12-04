@@ -37,6 +37,10 @@
     <p>
       <img src="./leak_screenshot.png" alt="Screenshot of memory leak in Chrome DevTools">
     </p>
+    <p>
+      This bug is fixed in Chromium 131 and later (hooray!). To see it in action with an older version of Chrome, you can install <a href="https://developer.chrome.com/blog/chrome-for-testing">Chrome for Testing</a> by running this command:
+    </p>
+    <pre>npx @puppeteer/browsers install chrome@130.0.6723.116</pre>
     <ol>
       <li><button id="1-fetch-basic">Fetch with basic response (no leak)</button></li>
       <li><button id="2-fetch-no-store">Fetch with no-store header in response (LEAK)</button></li>
